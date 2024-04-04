@@ -26,4 +26,24 @@ jobs:
     - name: display SoftUni username
       run: echo "Murtadoc"
 
+  ui_tests:
+    needs: build_test
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: checkout repository
+      uses: actions/checkout@v4
+    - name: Use Node.js version 20.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+        cache: 'npm'
+    - name: install the dependancies
+      run: npm install
+    - name: run the app
+      run: npm start &
+    - name: run UI tests
+      run: npm run test:ui  
+
+    
 
